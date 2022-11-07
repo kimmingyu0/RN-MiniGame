@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Keyboard,
   StyleSheet,
@@ -7,8 +8,21 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 
 import StartGameScreen from "./screens/StartGameScreen";
+import GameScreen from "./screens/GameScreen";
 
 export default function App() {
+  const [userNumber, setUserNumber] = useState();
+
+  const pickedNumberHandler = (pickedNumber) => {
+    setUserNumber(pickedNumber);
+  };
+
+  let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
+
+  if (userNumber) {
+    screen = <GameScreen></GameScreen>;
+  }
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -22,7 +36,7 @@ export default function App() {
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}
         >
-          <StartGameScreen />
+          {screen}
         </ImageBackground>
       </LinearGradient>
     </TouchableWithoutFeedback>
@@ -34,6 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    opacity:0.15
-  }
+    opacity: 0.15,
+  },
 });

@@ -2,6 +2,9 @@ import { Text, View, Pressable, StyleSheet } from "react-native";
 
 // RN의 공식 github 계정을 살펴보면 <Button>
 // 구조가 <View><Text> 조합인걸 알 수 있다.
+
+import Colors from "../constants/Colors";
+
 const PrimaryButton = ({ children, onPress }) => {
   return (
     <View style={styles.buttonOuterContainer}>
@@ -12,7 +15,7 @@ const PrimaryButton = ({ children, onPress }) => {
             : styles.buttonInnerContainer
         }
         onPress={onPress}
-        android_ripple={{ color: "#640233" }}
+        android_ripple={{ color: Colors.primary600 }}
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   buttonInnerContainer: {
-    backgroundColor: "#72063c",
+    backgroundColor: Colors.primary500,
     paddingVertical: 8,
     paddingHorizontal: 16,
     elevation: 2,

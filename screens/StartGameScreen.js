@@ -1,5 +1,5 @@
 import {
-    Keyboard,
+  Keyboard,
   StyleSheet,
   TextInput,
   TouchableWithoutFeedback,
@@ -22,8 +22,14 @@ const StartGameScreen = () => {
           autoCapitalize="none" //일반 텍스트일 경우 자동 대문자 입력할 수 있는 프로퍼티
           autoCorrect={false} //자동 수정 설정 가능한 프로퍼티
         />
-        <PrimaryButton>Reset</PrimaryButton>
-        <PrimaryButton>Confirm</PrimaryButton>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton>Confirm</PrimaryButton>
+          </View>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -33,6 +39,8 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   inputContainer: {
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
@@ -56,5 +64,11 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });

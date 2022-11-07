@@ -1,9 +1,6 @@
-import {
-  Keyboard,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Keyboard, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+
 import StartGameScreen from "./screens/StartGameScreen";
 
 export default function App() {
@@ -13,9 +10,9 @@ export default function App() {
         Keyboard.dismiss();
       }}
     >
-      <View style={styles.rootScreen}>
+      <LinearGradient colors={["#4e0329", "#ddb52f"]} style={styles.rootScreen}>
         <StartGameScreen />
-      </View>
+      </LinearGradient>
     </TouchableWithoutFeedback>
   );
 }
@@ -23,6 +20,5 @@ export default function App() {
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    backgroundColor: "#ddb52f",
   },
 });

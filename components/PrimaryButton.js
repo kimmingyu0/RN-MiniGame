@@ -2,10 +2,7 @@ import { Text, View, Pressable, StyleSheet } from "react-native";
 
 // RN의 공식 github 계정을 살펴보면 <Button>
 // 구조가 <View><Text> 조합인걸 알 수 있다.
-const PrimaryButton = ({ children }) => {
-  const pressHandler = () => {
-    console.log("Pressed");
-  };
+const PrimaryButton = ({ children, onPress }) => {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -14,7 +11,7 @@ const PrimaryButton = ({ children }) => {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: "#640233" }}
       >
         <Text style={styles.buttonText}>{children}</Text>

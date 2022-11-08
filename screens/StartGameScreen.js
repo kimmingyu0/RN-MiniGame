@@ -5,6 +5,8 @@ import {
   View,
   Alert,
   useWindowDimensions,
+  KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
@@ -41,31 +43,38 @@ const StartGameScreen = ({ onPickNumber }) => {
   const marginTopDistance = height < 300 ? 30 : 100;
 
   return (
-    <View style={[styles.rootContainer, {marginTop: marginTopDistance}]}>
-      <Title>Guess My Number</Title>
-      <Card>
-        <InstructionText>Enter a Number</InstructionText>
-        <TextInput
-          style={styles.numberInput}
-          maxLength={2}
-          keyboardType="number-pad"
-          returnKeyType={"done"} //keyboardType="number-pad" 일 경우 확인 return 버튼이 없어서 추가해줌
-          autoCapitalize="none" //일반 텍스트일 경우 자동 대문자 입력할 수 있는 프로퍼티
-          autoCorrect={false} //자동 수정 설정 가능한 프로퍼티
-          // onSubmitEditing={} return시 submit 처리 이벤트
-          onChangeText={numberInputHandler}
-          value={enteredNumber}
-        />
-        <View style={styles.buttonsContainer}>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
-          </View>
-          <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-          </View>
+    <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
+        <View style={[styles.rootContainer, { marginTop: marginTopDistance }]}>
+          <Title>Guess My Number</Title>
+          <Card>
+            <InstructionText>Enter a Number</InstructionText>
+            <TextInput
+              style={styles.numberInput}
+              maxLength={2}
+              keyboardType="number-pad"
+              returnKeyType={"done"} //keyboardType="number-pad" 일 경우 확인 return 버튼이 없어서 추가해줌
+              // <KeyboardAvoidingView behavior="">추가시 키보드 외 영역 클릭시 닫힘 
+              autoCapitalize="none" //일반 텍스트일 경우 자동 대문자 입력할 수 있는 프로퍼티
+              autoCorrect={false} //자동 수정 설정 가능한 프로퍼티
+              // onSubmitEditing={} return시 submit 처리 이벤트
+              onChangeText={numberInputHandler}
+              value={enteredNumber}
+            />
+            <View style={styles.buttonsContainer}>
+              <View style={styles.buttonContainer}>
+                <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+              </View>
+              <View style={styles.buttonContainer}>
+                <PrimaryButton onPress={confirmInputHandler}>
+                  Confirm
+                </PrimaryButton>
+              </View>
+            </View>
+          </Card>
         </View>
-      </Card>
-    </View>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
@@ -74,6 +83,9 @@ export default StartGameScreen;
 // const deviceHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   rootContainer: {
     flex: 1,
     // marginTop: deviceHeight < 300 ? 30 : 100,

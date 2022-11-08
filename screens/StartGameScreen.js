@@ -40,7 +40,7 @@ const StartGameScreen = ({ onPickNumber }) => {
     onPickNumber(chosenNumber);
   };
 
-  const marginTopDistance = height < 300 ? 30 : 100;
+  const marginTopDistance = height < 420 ? 30 : 100;
 
   return (
     <ScrollView style={styles.screen}>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   rootContainer: {
     flex: 1,
-    // marginTop: deviceHeight < 300 ? 30 : 100,
+    // marginTop: deviceHeight < 420 ? 30 : 100,
     alignItems: "center",
   },
   numberInput: {

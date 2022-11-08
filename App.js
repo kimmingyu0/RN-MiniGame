@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import { StatusBar } from "expo-status-bar";
+import Constants from "expo-constants";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
@@ -70,18 +71,27 @@ export default function App() {
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}
         >
-          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+          <SafeAreaView style={[styles.rootScreen, styles.screen]}>
+            {screen}
+          </SafeAreaView>
         </ImageBackground>
       </LinearGradient>
     </>
   );
 }
 
+/*
+  <SafeAreaView></SafeAreaView> <= ios의 경우 상단 노치영역만큼 밑으로 내려 컨텐츠를 보장해주지만
+  안드로이드의 경우 적용이 안되어 Constants의 statusBarHeight 값만큼 marginTop을 주어 해결하였다...
+*/
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
   },
   backgroundImage: {
     opacity: 0.15,
+  },
+  screen: {
+    paddingTop: Constants.statusBarHeight, // Constants의 statusBarHeight 값을 이용한다.
   },
 });

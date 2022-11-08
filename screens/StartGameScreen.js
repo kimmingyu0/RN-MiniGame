@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, View, Alert, Text } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Alert,
+  useWindowDimensions,
+} from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Title from "../components/ui/Title";
 import Colors from "../constants/Colors";
@@ -8,6 +14,8 @@ import InstructionText from "../components/ui/InstructionText";
 
 const StartGameScreen = ({ onPickNumber }) => {
   const [enteredNumber, setEnteredNumber] = useState("");
+
+  const { width, height } = useWindowDimensions();
 
   const numberInputHandler = (enteredText) => {
     setEnteredNumber(enteredText);
@@ -30,8 +38,10 @@ const StartGameScreen = ({ onPickNumber }) => {
     onPickNumber(chosenNumber);
   };
 
+  const marginTopDistance = height < 300 ? 30 : 100;
+
   return (
-    <View style={styles.rootContainer}>
+    <View style={[styles.rootContainer, {marginTop: marginTopDistance}]}>
       <Title>Guess My Number</Title>
       <Card>
         <InstructionText>Enter a Number</InstructionText>
@@ -39,7 +49,7 @@ const StartGameScreen = ({ onPickNumber }) => {
           style={styles.numberInput}
           maxLength={2}
           keyboardType="number-pad"
-          returnKeyType={ 'done' } //keyboardType="number-pad" 일 경우 확인 return 버튼이 없어서 추가해줌
+          returnKeyType={"done"} //keyboardType="number-pad" 일 경우 확인 return 버튼이 없어서 추가해줌
           autoCapitalize="none" //일반 텍스트일 경우 자동 대문자 입력할 수 있는 프로퍼티
           autoCorrect={false} //자동 수정 설정 가능한 프로퍼티
           // onSubmitEditing={} return시 submit 처리 이벤트
@@ -61,10 +71,12 @@ const StartGameScreen = ({ onPickNumber }) => {
 
 export default StartGameScreen;
 
+// const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    marginTop: 100,
+    // marginTop: deviceHeight < 300 ? 30 : 100,
     alignItems: "center",
   },
   numberInput: {

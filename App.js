@@ -1,12 +1,9 @@
 import { useState } from "react";
-import {
-  StyleSheet,
-  ImageBackground,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import { StatusBar } from "expo-status-bar";
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
@@ -26,7 +23,7 @@ export default function App() {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  
+
   const pickedNumberHandler = (pickedNumber) => {
     setUserNumber(pickedNumber);
     setGameIsOver(false);
@@ -61,12 +58,8 @@ export default function App() {
   }
 
   return (
-    // <TouchableWithoutFeedback
-    //   onPress={() => {
-    //     Keyboard.dismiss();
-    //   }}
-    // > 내부에 FlatList 있을 경우 
-    //터치 이벤트를 가로채서 스크롤 안됨
+    <>
+      <StatusBar style="light" />
       <LinearGradient
         colors={[Colors.primary700, Colors.accent500]}
         style={styles.rootScreen}
@@ -80,7 +73,7 @@ export default function App() {
           <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
         </ImageBackground>
       </LinearGradient>
-    // </TouchableWithoutFeedback>
+    </>
   );
 }
 

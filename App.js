@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
-  Keyboard,
   StyleSheet,
-  TouchableWithoutFeedback,
   ImageBackground,
   SafeAreaView,
 } from "react-native";
@@ -34,8 +32,9 @@ export default function App() {
     setGameIsOver(false);
   };
 
-  const gameOverHandler = () => {
+  const gameOverHandler = (numberOfRounds) => {
     setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
   };
 
   const startNewGameHandler = () => {
@@ -62,11 +61,12 @@ export default function App() {
   }
 
   return (
-    <TouchableWithoutFeedback
-      onPress={() => {
-        Keyboard.dismiss();
-      }}
-    >
+    // <TouchableWithoutFeedback
+    //   onPress={() => {
+    //     Keyboard.dismiss();
+    //   }}
+    // > 내부에 FlatList 있을 경우 
+    //터치 이벤트를 가로채서 스크롤 안됨
       <LinearGradient
         colors={[Colors.primary700, Colors.accent500]}
         style={styles.rootScreen}
@@ -80,7 +80,7 @@ export default function App() {
           <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
         </ImageBackground>
       </LinearGradient>
-    </TouchableWithoutFeedback>
+    // </TouchableWithoutFeedback>
   );
 }
 
